@@ -154,11 +154,13 @@ void Planner::plan() {
 
     // ___________________________
     // LISTS ALLOWCATED ROW MAJOR ORDER
-    int width = grid->info.width;
-    int height = grid->info.height;
-    int depth = Constants::headings;
-    int length = width * height * depth;
+    int width = grid->info.width;             // 80
+    int height = grid->info.height;           // 80
+    int depth = Constants::headings;          // 72
+    int length = width * height * depth;      // 80 * 80 * 72
     // define list pointers and initialize lists
+    // 3D new width * height * depth 个节点
+    // 2D new width * height 个节点
     Node3D* nodes3D = new Node3D[length]();
     Node2D* nodes2D = new Node2D[width * height]();
 
@@ -169,6 +171,7 @@ void Planner::plan() {
     float t = tf::getYaw(goal.pose.orientation);
     // set theta to a value (0,2PI]
     t = Helper::normalizeHeadingRad(t);
+    // 初始化目标节点
     const Node3D nGoal(x, y, t, 0, 0, nullptr);
     // __________
     // DEBUG GOAL
@@ -182,6 +185,7 @@ void Planner::plan() {
     t = tf::getYaw(start.pose.pose.orientation);
     // set theta to a value (0,2PI]
     t = Helper::normalizeHeadingRad(t);
+    // 初始化起始节点
     Node3D nStart(x, y, t, 0, 0, nullptr);
     // ___________
     // DEBUG START
@@ -204,6 +208,7 @@ void Planner::plan() {
     // CREATE THE UPDATED PATH
     path.updatePath(smoother.getPath());
     // SMOOTH THE PATH
+    // 将 path 转化为 ROS 消息格式 便于进行可视化
     smoother.smoothPath(voronoiDiagram);
     // CREATE THE UPDATED PATH
     smoothedPath.updatePath(smoother.getPath());

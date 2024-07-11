@@ -23,11 +23,11 @@ class Node3D {
     this->t = t;
     this->g = g;
     this->h = h;
-    this->pred = pred;
-    this->o = false;
-    this->c = false;
-    this->idx = -1;
-    this->prim = prim;
+    this->pred = pred;     // 存放前驱节点 
+    this->o = false;       // 待访问 open(o) 置 1
+    this->c = false;       // 已访问 close(c) 置 1
+    this->idx = -1;        // ？
+    this->prim = prim;     // ？
   }
 
   // GETTER METHODS

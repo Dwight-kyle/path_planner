@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(hybrid_astar)
 
+set(CMAKE_BUILD_TYPE "Debug")
 
 ## C++11
 include(CheckCXXCompilerFlag)

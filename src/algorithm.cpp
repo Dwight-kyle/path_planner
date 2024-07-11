@@ -39,9 +39,11 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
                                Visualize& visualization) {
 
   // PREDECESSOR AND SUCCESSOR INDEX
+  // 前驱 和 后继 索引
   int iPred, iSucc;
   float newG;
   // Number of possible directions, 3 for forward driving and an additional 3 for reversing
+  // 允许换向吗？ 允许的话，方向为 6 ,否则为 3
   int dir = Constants::reverse ? 6 : 3;
   // Number of iterations the algorithm has run for stopping based on Constants::iterations
   int iterations = 0;
@@ -138,6 +140,7 @@ Node3D* Algorithm::hybridAStar(Node3D& start,
     // _____________________________
     // LAZY DELETION of rewired node
     // if there exists a pointer this node has already been expanded
+    // 如果存在指针，则该节点已被拓展
     if (nodes3D[iPred].isClosed()) {
       // pop node from the open list and start with a fresh node
       O.pop();
